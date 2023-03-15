@@ -43,5 +43,6 @@ Antes de começarmos o passo a passo, vamos começar explicando a existência de
 11. Procure, na aba superior, pelo serviço *EC2* e navegue até Load Balancer. 
 12. Copie o URL do ELB e cole em seu navegador. É esperado que seja apresentado o site sem erros. 
 13. Caso apresentar erro de *5xx*, está relacionado a erros de servidor, confira novamente o passo a passo.
+14. Caso ainda restar dúvidas ou houver algum equívoco em meu código, solicito que me comuniquem, por favor.
 
 ✅ Passo a passo finalizado. Aprendemos a tornar um website disponível através do AWS ECS.
