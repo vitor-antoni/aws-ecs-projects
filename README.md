@@ -11,7 +11,7 @@ Neste repositório, tenho interesse em compartilhar meus aprendizados acerca de 
 **[MAIS NOVO - MAIS ANTIGO]**
 
 - **Website with Containers** <br>
-Neste projeto, usei um pouco de Shell Scripting (para automatizar algumas tarefas e comandos) e um arquivo Dockerfile para criar uma imagem personalizada a partir da imagem do NGNIX. Você pode encontrar, também, um passo a passo para "levantar" seu website usando containers com o serviço ECS.
+Neste projeto, usei um pouco de Shell Scripting (para automatizar algumas tarefas e comandos) e um arquivo Dockerfile para criar uma imagem personalizada a partir da imagem do NGNIX. Você pode encontrar, também, um passo a passo para "levantar" seu website usando containers com o serviço ECS. **Data:** *14/03/2023*
 
 ## 📑 Informações adicionais
 
