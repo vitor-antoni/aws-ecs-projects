@@ -1,6 +1,6 @@
 # Website With Containers
 ### Apresentação
-Neste projeto, usei um pouco de Shell Scripting (para automatizar algumas tarefas e comandos) e um arquivo Dockerfile para criar uma imagem personalizada a partir da imagem do NGNIX. Você pode encontrar, também, um passo a passo para "levantar" seu website usando containers com o serviço ECS.
+Neste projeto, usei um pouco de Shell Script (para automatizar algumas tarefas e comandos) e um arquivo Dockerfile para criar uma imagem personalizada a partir da imagem do NGNIX. Você pode encontrar, também, um passo a passo para "levantar" seu website usando containers com o serviço ECS.
 
 ## ❗ Explicação
 Antes de começarmos o passo a passo, vamos começar explicando a existência de arquivo dentro deste diretório: <br>
@@ -8,7 +8,7 @@ Antes de começarmos o passo a passo, vamos começar explicando a existência de
 
 → *[testeImagemDocker.sh](testeImagemDocker.sh)* : Aqui, podemos executar este script para instalar o *Docker*, montar a imagem e rodar um container.
 
-→ *[enviaParaECR.sh](enviaParaECR.sh)* : Após o teste de imagem ser bem sucedido, este script deverá ser executado para encaminhar a imagem personalizada próprio para o Elastic Container Registry (ECR).
+→ *[enviaParaECR.sh](enviaParaECR.sh)* : Após o teste de imagem ser bem-sucedido, este script deverá ser executado para encaminhar a imagem personalizada próprio para o Elastic Container Registry (ECR).
 
 → *[html/](html/)* : Diretório que possuí o index.html (Sua página WEB).
 
@@ -23,7 +23,7 @@ Antes de começarmos o passo a passo, vamos começar explicando a existência de
 
 1. Realize o download deste repositório ou copie o código que está dentro de cada arquivo para sua máquina local.
 2. Edite os arquivos: `html/index.html`, `enviaParaECR.sh` e `testeImagemDocker.sh`.
-3. Execute o arquivo `testeImagemDocker.sh`, aguarde a instalação do *Docker* e, logo, será retornado ao terminal, o conteúdo do site através do comando `curl localhost:80` se houver sucesso na execução do scripting e na configuração do `Docker`.
+3. Execute o arquivo `testeImagemDocker.sh`, aguarde a instalação do *Docker* e, logo, será retornado ao terminal, o conteúdo do site através do comando `curl localhost:80` se houver sucesso na execução do script e na configuração do `Docker`.
 
 ✅ Primeira etapa concluída. Vamos para a próxima!
 
@@ -31,11 +31,18 @@ Antes de começarmos o passo a passo, vamos começar explicando a existência de
 5. **Criação de repositório privado**: apenas especifique o nome do repositório. Você pode ativar a opção "Imutabilidade de etiquetas" caso quiser evitar que imagens de containers com mesma tag sejam substituídas. Neste projeto, vamos manter esta opção **desativada**, pois estamos utilizando a tag "latest", logo, sempre que for realizado um *push*/update de uma nova imagem, irá substituir a imagem já existente no ECR.
 6. Para realizar o *push* da imagem para o ECR, você deverá executar o arquivo `enviaParaECR.sh`.
 
-✅ Segunda tapa concluída. Vamos para a próxima!
+✅ Segunda etapa concluída. Vamos para a próxima!
 
 7. Precisamos, agora, criar um **cluster de *containers*** usando o **AWS ECS**: Especificaremos o nome do cluster, a VPC e a sub-nets desejadas. Recomendo a seleção de, **no mínimo**, **duas sub-nets privadas** para podermos garantir uma **alta disponibilidade** de nossa aplicação.
 8. Vamos criar uma ***Taks Definition*** (Definição de Tarefa) especificando a tarefa que gostaríamos que o container realize. Neste caso, vamos selecionar a URI da imagem que realizamos o upload para o ECR.
-9. Voltando a aba de Clusters, entraremos na configuração do cluster criado no passo anterior e **¹ criaremos** um ***serviço***(Para uma aplicação WEB, usar o *serviço* é mais adequado que uma *tarefa*). **² Selecione** a Taks Definition/Definição de tarefa, criada anteriormente, e sua versão mais recente. **³ Especifique** o nome para o serviço. **⁴ Especifique**, no mínimo, 2 no campo "tarefas desejadas", mas esta especificação pode variar dependendo do tamanho e workload da sua aplicação. **⁵ Selecione** as sub-nets privadas de sua VPC. **⁶ Habilite** a escalabilidade automática, especifique 2 para o mínimo de tarefas desejadas e 4 para o máximo. **⁷ Ainda** sobre escalabilidade, selecione a métrica de *ECSServiceAverageCPUUtilization* e utilize os valores padrões de "Valor de Destino": 70, "Aumentar a escala...": 300 e "Reduzir a escala...": 300.
+9. Voltando a aba de Clusters, entraremos na configuração do cluster criado no passo anterior e criaremos um **serviço**.
+
+- **Selecione** a Taks Definition/Definição de tarefa, criada anteriormente, e sua versão mais recente.⋅⋅
+- **Especifique** o nome para o serviço.
+- **Especifique**, no mínimo, 2 no campo "tarefas desejadas", mas esta especificação pode variar dependendo do tamanho e workload da sua aplicação.
+- **Selecione** as sub-nets privadas de sua VPC. 
+- **Habilite** a escalabilidade automática, especifique 2 para o mínimo de tarefas desejadas e 4 para o máximo.
+- **Ainda** sobre escalabilidade, selecione a métrica de *ECSServiceAverageCPUUtilization* e utilize os valores padrões de "Valor de Destino": 70, "Aumentar a escala...": 300 (segundos) e "Reduzir a escala...": 300 (segundos).
 10. Especificaremos o Load Balancer que está em execução na sua conta (caso não houver um ELB em execução, crie um Load Balancer e um Target Group com a porta HTTP → 80).
 
 ✅ Terceira etapa concluída. Vamos realizar o teste!
