@@ -12,6 +12,9 @@ systemctl enable docker
 #    mkdir html
 #    touch html/index.html
 
+# Faz donwload da imagem do nginx
+docker image pull nginx
+
 # Cria uma imagem com base no Dockerfile
 #   "-t" → para especificar uma tag
 docker image build -t aplicacao-web:versao0.1 .
