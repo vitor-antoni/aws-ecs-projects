@@ -21,3 +21,11 @@ docker image ls
 #   "-d" → para rodar em background
 #   "-p" → para especificar a porta
 docker container run -d -p 80:80 aplicacao-web:versao0.1
+
+# Testar o container
+curl localhost:80
+
+# Para para o container
+docker container ls
+docker container stop [container_id]
+docker container rm [container_id]
