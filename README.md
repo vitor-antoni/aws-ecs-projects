@@ -10,6 +10,9 @@ Neste repositório, tenho interesse em compartilhar meus aprendizados acerca de 
 
 **[MAIS NOVO - MAIS ANTIGO]**
 
+- **Website PHP** <br>
+Seguindo a mesma ideia do projeto anteriror ("Website with Containers"), os códigos previstos neste projeto visam criar um website com containers do ECS, mas desta vez, utilizando a `imagem` do PHP e Apache para servir um website que apresente informações privadas sobre o container - ou task do AWS ECS.
+
 - **Website with Containers** <br>
 Neste projeto, usei um pouco de Shell Script (para automatizar algumas tarefas e comandos) e um arquivo Dockerfile para criar uma imagem personalizada a partir da imagem do NGNIX. Você pode encontrar, também, um passo a passo para "levantar" seu website usando containers com o serviço ECS. **Data:** *14/03/2023*
 
